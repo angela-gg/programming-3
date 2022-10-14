@@ -10,10 +10,10 @@ function setup() {
     for (var y = 0; y < row; ++y) {
         matrix[y] = [];
 
-    for (var x = 0; x < column; ++x) {
-        matrix[y][x] = random([0,1,2,3]);
+        for (var x = 0; x < column; ++x) {
+            matrix[y][x] = random([0, 1, 2, 3]);
+        }
     }
-}
     frameRate(500);
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
@@ -23,11 +23,11 @@ function setup() {
             if (matrix[i][j] === 1) {
                 const gr = new Grass(j, i, 1);
                 grassArr.push(gr);
-            }else if(matrix[i][j] === 2){
-                const eaters = new GrassEater(j,i,1);
+            } else if (matrix[i][j] === 2) {
+                const eaters = new GrassEater(j, i, 1);
                 grassEaterArr.push(eaters);
-            }else if(matrix[i][j] === 3){
-                const eaterseater = new GrassEaterEater(j,i,1)
+            } else if (matrix[i][j] === 3) {
+                const eaterseater = new GrassEaterEater(j, i, 1)
                 grassEaterEaterArr.push(eaterseater);
             }
         }
@@ -42,11 +42,11 @@ function draw() {
 
             if (matrix[y][x] === 1) {
                 fill("green");
-            }else if (matrix[y][x] === 2) {
+            } else if (matrix[y][x] === 2) {
                 fill("yellow");
-            }else if(matrix[y][x] === 3){
+            } else if (matrix[y][x] === 3) {
                 fill("red");
-            }else{
+            } else {
                 fill("grey");
             }
 
@@ -63,9 +63,67 @@ function draw() {
         grassEaterArr[i].eat();
         grassEaterArr[i].die();
     }
-    for(var i in grassEaterEaterArr) {
+    for (var i in grassEaterEaterArr) {
         grassEaterEaterArr[i].mul();
         grassEaterEaterArr[i].eat();
         grassEaterEaterArr[i].die();
     }
 }
+
+
+
+
+
+class Animal {
+    constructor(name, color, age) {
+        this.name = name;
+        this.color = color;
+        this.age = age;
+    }
+
+    talk() {
+        console.log("Inch-vor dzayn");
+    } 
+    
+    sleep() {
+        console.log("Sleeping...");
+    } 
+    
+    eat() {
+        console.log("Eating...");
+    }
+
+    run() {
+        console.log("Running...")
+    }
+} 
+
+class Cat extends Animal {
+
+    constructor(name, color, age, dzuk) {
+        super(name, color, age);
+        this.dzuk = dzuk;
+    }
+
+    climb() {
+        super.run();
+        console.log("Climbing...");
+    }
+
+    talk() {
+        console.log("Meow");
+    }
+}
+
+const barsik = new Cat("Barsik", "black", 5);
+
+barsik.sleep();
+barsik.talk();
+
+class Dog extends Animal {
+
+}
+
+const leksi = new Dog("Leksi", "white", 2);
+
+leksi.run();
